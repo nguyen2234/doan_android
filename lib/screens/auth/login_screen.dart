@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../database/user_dao.dart';
 import '../../utils/session.dart';
 import 'register_screen.dart';
-import '../profile/profile_screen.dart';
+import '../main_screen.dart'; // Chuyển sang màn hình chính sau khi đăng nhập
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -31,7 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     await Session.save(user.id!);
     if (!mounted) return;
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ProfileScreen(user: user)));
+    // Sau khi đăng nhập thành công, chuyển vào màn hình chính
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen(user: user)));
   }
 
   @override

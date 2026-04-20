@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'database/user_dao.dart';
 import 'screens/auth/login_screen.dart';
-import 'screens/profile/profile_screen.dart';
+import 'screens/main_screen.dart'; // Màn hình chính có bottom navigation
 import 'utils/session.dart';
 
 void main() {
@@ -48,7 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
     if (user == null) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
     } else {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => ProfileScreen(user: user)));
+      // Sau khi tìm được user, chuyển sang màn hình chính
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen(user: user)));
     }
   }
 
