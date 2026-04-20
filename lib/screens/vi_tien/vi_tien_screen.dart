@@ -128,7 +128,7 @@ class _ViTienScreenState extends State<ViTienScreen> {
           : RefreshIndicator(
               onRefresh: _taiDuLieu,
               child: ListView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 88),
                 children: [
                   // ---- Thẻ tổng số dư tất cả ví ----
                   Container(

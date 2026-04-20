@@ -118,7 +118,7 @@ class _BaoCaoScreenState extends State<BaoCaoScreen> {
           : RefreshIndicator(
               onRefresh: _taiDuLieu,
               child: ListView(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 88),
                 children: [
                   // ---- Điều hướng tháng ----
                   _buildDieuHuongThang(),

@@ -271,7 +271,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // ---- Nút Đăng xuất ----
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 4, 16, 32),
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
               child: SizedBox(
                 height: 50,
                 child: ElevatedButton.icon(
@@ -295,6 +295,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
+
+          // Khoảng cách cuối tránh bị che bởi bottom nav
+          const SliverToBoxAdapter(child: SizedBox(height: 88)),
         ],
       ),
     );

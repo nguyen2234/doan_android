@@ -90,8 +90,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   SliverToBoxAdapter(child: _buildPhanTieuDe()),
                   // ---- Danh sách giao dịch gần đây ----
                   SliverToBoxAdapter(child: _buildDanhSachGiaoDich()),
-                  // Khoảng cách ở dưới cùng
-                  const SliverToBoxAdapter(child: SizedBox(height: 24)),
+                  // Khoảng cách ở dưới cùng (đủ để không bị che bởi bottom nav bar)
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 80 + MediaQuery.of(context).padding.bottom,
+                    ),
+                  ),
                 ],
               ),
             ),
