@@ -57,44 +57,50 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         elevation: 8,
+        height: 64,
+        padding: EdgeInsets.zero,
         shape: const CircularNotchedRectangle(), // Tạo khoảng lõm cho nút +
         notchMargin: 8,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // Tab 0: Trang chủ
-            _buildNutTab(
-              icon: Icons.home_outlined,
-              iconDaChon: Icons.home,
-              nhanVien: 'Trang chủ',
-              tabIndex: 0,
-            ),
-            // Tab 1: Ví tiền
-            _buildNutTab(
-              icon: Icons.account_balance_wallet_outlined,
-              iconDaChon: Icons.account_balance_wallet,
-              nhanVien: 'Ví tiền',
-              tabIndex: 1,
-            ),
+        child: SizedBox(
+          height: 64,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Tab 0: Trang chủ
+              _buildNutTab(
+                icon: Icons.home_outlined,
+                iconDaChon: Icons.home,
+                nhanVien: 'Trang chủ',
+                tabIndex: 0,
+              ),
+              // Tab 1: Ví tiền
+              _buildNutTab(
+                icon: Icons.account_balance_wallet_outlined,
+                iconDaChon: Icons.account_balance_wallet,
+                nhanVien: 'Ví tiền',
+                tabIndex: 1,
+              ),
 
-            // Khoảng trống cho nút FAB (+) ở giữa
-            const SizedBox(width: 48),
+              // Khoảng trống cho nút FAB (+) ở giữa
+              const SizedBox(width: 56),
 
-            // Tab 3: Báo cáo
-            _buildNutTab(
-              icon: Icons.bar_chart_outlined,
-              iconDaChon: Icons.bar_chart,
-              nhanVien: 'Báo cáo',
-              tabIndex: 3,
-            ),
-            // Tab 4: Hồ sơ
-            _buildNutTab(
-              icon: Icons.person_outline,
-              iconDaChon: Icons.person,
-              nhanVien: 'Hồ sơ',
-              tabIndex: 4,
-            ),
-          ],
+              // Tab 3: Báo cáo
+              _buildNutTab(
+                icon: Icons.bar_chart_outlined,
+                iconDaChon: Icons.bar_chart,
+                nhanVien: 'Báo cáo',
+                tabIndex: 3,
+              ),
+              // Tab 4: Hồ sơ
+              _buildNutTab(
+                icon: Icons.person_outline,
+                iconDaChon: Icons.person,
+                nhanVien: 'Hồ sơ',
+                tabIndex: 4,
+              ),
+            ],
+          ),
         ),
       ),
 
@@ -122,21 +128,23 @@ class _MainScreenState extends State<MainScreen> {
 
     return InkWell(
       onTap: () => setState(() => _tabDangChon = tabIndex),
+      borderRadius: BorderRadius.circular(8),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               laDaChon ? iconDaChon : icon,
               color: laDaChon ? const Color(0xFF1A73E8) : Colors.grey,
-              size: 24,
+              size: 22,
             ),
             const SizedBox(height: 2),
             Text(
               nhanVien,
               style: TextStyle(
-                fontSize: 11,
+                fontSize: 10,
                 color: laDaChon ? const Color(0xFF1A73E8) : Colors.grey,
                 fontWeight: laDaChon ? FontWeight.bold : FontWeight.normal,
               ),
