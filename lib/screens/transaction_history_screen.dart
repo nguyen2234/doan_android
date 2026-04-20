@@ -197,7 +197,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                 ? const Center(child: Text('Không có giao dịch nào'))
                 : ListView.separated(
                     itemCount: filtered.length,
-                    separatorBuilder: (_, __) => const Divider(height: 1),
+                    separatorBuilder: (_, _) => const Divider(height: 1),
                     itemBuilder: (_, i) => _TransactionTile(
                       t: filtered[i],
                       onDelete: () async {
