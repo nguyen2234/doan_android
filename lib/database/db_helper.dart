@@ -111,7 +111,27 @@ class DBHelper {
   // WALLETS
   static Future<List<Vi>> getWallets() async {
     final db = await database;
-    final maps = await db.query('wallets');
+    final maps = await db.query('wallets', orderBy: 'created_at ASC');
     return maps.map((m) => Vi.fromMap(m)).toList();
+  }
+
+  static Future<int> insertWallet(Vi vi) async {
+    final db = await database;
+    return db.insert('wallets', vi.toMap());
+  }
+
+  static Future<int> updateWallet(Vi vi) async {
+    final db = await database;
+    return db.update(
+      'wallets',
+      vi.toMap(),
+      where: 'id = ?',
+      whereArgs: [vi.id],
+    );
+  }
+
+  static Future<int> deleteWallet(int id) async {
+    final db = await database;
+    return db.delete('wallets', where: 'id = ?', whereArgs: [id]);
   }
 }
