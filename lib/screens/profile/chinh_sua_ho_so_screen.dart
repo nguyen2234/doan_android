@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../database/user_dao.dart';
+import '../../database/db_helper.dart';
 import '../../models/user.dart';
 
 // ============================================================
@@ -66,7 +66,7 @@ class _ChinhSuaHoSoScreenState extends State<ChinhSuaHoSoScreen> {
       avatar: _duongDanAnh,
     );
 
-    await UserDao().update(userCapNhat);
+    await DBHelper.updateUser(userCapNhat);
     setState(() => _dangLuu = false);
 
     if (!mounted) return;

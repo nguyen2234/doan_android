@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../database/user_dao.dart';
+import '../../database/db_helper.dart';
 import '../../utils/session.dart';
 import 'register_screen.dart';
 import '../main_screen.dart'; // Chuyển sang màn hình chính sau khi đăng nhập
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _loading = true);
-    final user = await UserDao().login(_emailCtrl.text.trim(), _passwordCtrl.text);
+    final user = await DBHelper.login(_emailCtrl.text.trim(), _passwordCtrl.text);
     setState(() => _loading = false);
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
