@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/user.dart';
 import '../../utils/session.dart';
 import '../auth/login_screen.dart';
+import '../danh_muc/danh_muc_screen.dart';
 import 'chinh_sua_ho_so_screen.dart';
 
 // ============================================================
@@ -134,7 +135,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mauIcon: const Color(0xFFFF9800),
                   tieuDe: 'Quản lý danh mục',
                   moTa: 'Thêm, sửa, xóa danh mục thu/chi',
-                  onTap: () => _dangPhatTrien('Quản lý danh mục'),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const DanhMucScreen(),
+                    ),
+                  ),
                 ),
                 _ItemDanhMuc(
                   icon: Icons.account_balance_wallet_outlined,
