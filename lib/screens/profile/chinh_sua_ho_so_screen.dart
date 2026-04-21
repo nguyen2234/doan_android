@@ -76,7 +76,7 @@ class _ChinhSuaHoSoScreenState extends State<ChinhSuaHoSoScreen> {
         backgroundColor: Colors.green,
       ),
     );
-    Navigator.pop(context); // Quay lại màn hình hồ sơ
+    Navigator.pop(context, userCapNhat); // Trả User mới về ProfileScreen
   }
 
   @override
