@@ -105,6 +105,31 @@ class DBHelper {
         lap_lai   INTEGER DEFAULT 0
       )
     ''');
+
+    await _themDuLieuMau(db);
+  }
+
+  static Future<void> _themDuLieuMau(Database db) async {
+    // Danh mục mẫu
+    await db.insert('danh_muc', {'ten': 'Lương', 'loai': 'thu', 'bieu_tuong': 'attach_money', 'mau_sac': '#4CAF50'});
+    await db.insert('danh_muc', {'ten': 'Thưởng', 'loai': 'thu', 'bieu_tuong': 'card_giftcard', 'mau_sac': '#8BC34A'});
+    await db.insert('danh_muc', {'ten': 'Ăn uống', 'loai': 'chi', 'bieu_tuong': 'restaurant', 'mau_sac': '#FF5722'});
+    await db.insert('danh_muc', {'ten': 'Di chuyển', 'loai': 'chi', 'bieu_tuong': 'directions_car', 'mau_sac': '#FF9800'});
+    await db.insert('danh_muc', {'ten': 'Hóa đơn', 'loai': 'chi', 'bieu_tuong': 'receipt', 'mau_sac': '#F44336'});
+    await db.insert('danh_muc', {'ten': 'Mua sắm', 'loai': 'chi', 'bieu_tuong': 'shopping_bag', 'mau_sac': '#9C27B0'});
+
+    // Ví mẫu
+    final now = DateTime.now().toIso8601String();
+    await db.insert('vi_tien', {'ten': 'Tiền mặt', 'so_du': 5000000, 'ngay_tao': now});
+    await db.insert('vi_tien', {'ten': 'Ngân hàng', 'so_du': 20000000, 'ngay_tao': now});
+
+    // Giao dịch mẫu
+    final thang = DateTime.now();
+    await db.insert('giao_dich', {'so_tien': 15000000, 'loai': 'thu', 'ma_danh_muc': 1, 'ma_vi': 2, 'ghi_chu': 'Lương tháng 6', 'ngay': DateTime(thang.year, thang.month, 1).toIso8601String(), 'ngay_tao': now});
+    await db.insert('giao_dich', {'so_tien': 350000, 'loai': 'chi', 'ma_danh_muc': 5, 'ma_vi': 1, 'ghi_chu': 'Tiền điện', 'ngay': DateTime(thang.year, thang.month, 3).toIso8601String(), 'ngay_tao': now});
+    await db.insert('giao_dich', {'so_tien': 120000, 'loai': 'chi', 'ma_danh_muc': 3, 'ma_vi': 1, 'ghi_chu': 'Ăn trưa', 'ngay': DateTime(thang.year, thang.month, 5).toIso8601String(), 'ngay_tao': now});
+    await db.insert('giao_dich', {'so_tien': 2000000, 'loai': 'thu', 'ma_danh_muc': 2, 'ma_vi': 2, 'ghi_chu': 'Thưởng dự án', 'ngay': DateTime(thang.year, thang.month, 10).toIso8601String(), 'ngay_tao': now});
+    await db.insert('giao_dich', {'so_tien': 80000, 'loai': 'chi', 'ma_danh_muc': 4, 'ma_vi': 1, 'ghi_chu': 'Xăng xe', 'ngay': DateTime(thang.year, thang.month, 12).toIso8601String(), 'ngay_tao': now});
   }
 
   // ════════════════════════════════════════════════════════════

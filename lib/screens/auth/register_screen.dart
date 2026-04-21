@@ -24,6 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final existing = await DBHelper.getUserByEmail(_emailCtrl.text.trim());
     if (existing != null) {
       setState(() => _loading = false);
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Email đã được sử dụng')),
       );

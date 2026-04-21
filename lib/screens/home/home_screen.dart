@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: Colors.white24),
                 ),
@@ -221,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.15),
+        color: Colors.white.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.white24),
       ),
@@ -308,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -319,7 +319,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // Icon loại giao dịch
           CircleAvatar(
             radius: 22,
-            backgroundColor: mau.withOpacity(0.1),
+            backgroundColor: mau.withValues(alpha: 0.1),
             child: Icon(
               laThu ? Icons.arrow_downward : Icons.arrow_upward,
               color: mau,

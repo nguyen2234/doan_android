@@ -7,6 +7,7 @@ import 'giao_dich/them_giao_dich_screen.dart';
 import 'vi_tien/vi_tien_screen.dart';
 import 'bao_cao/bao_cao_screen.dart';
 import 'profile/profile_screen.dart';
+import 'transaction_history_screen.dart';
 
 // ============================================================
 // Màn hình chính - chứa thanh điều hướng dưới cùng (Bottom Navigation)
@@ -38,16 +39,16 @@ class _MainScreenState extends State<MainScreen> {
     // Danh sách các màn hình tương ứng với từng tab
     // Chú ý: tab index 2 (Thêm) không có màn hình vì sẽ mở như dialog
     final List<Widget> cacManHinh = [
-      HomeScreen(user: widget.user),        // Tab 0: Trang chủ
-      const ViTienScreen(),                 // Tab 1: Ví tiền
-      // Tab 2 (nút +): không có màn hình tương ứng
-      const BaoCaoScreen(),                 // Tab 3: Báo cáo
-      ProfileScreen(user: widget.user),     // Tab 4: Hồ sơ
+      HomeScreen(user: widget.user),       // tab 0
+      const ViTienScreen(),                // tab 1
+      // tab 2: nút + (không có màn hình)
+      const TransactionHistoryScreen(),    // tab 3
+      const BaoCaoScreen(),                // tab 4
+      ProfileScreen(user: widget.user),    // tab 5
     ];
 
-    // Chuyển đổi index tab thực tế
-    // (vì tab 2 là nút + đặc biệt, không phải màn hình)
-    int indexManHinh = _tabDangChon < 2 ? _tabDangChon : _tabDangChon - 1;
+    // Tab 2 là nút +, bỏ qua khi tính index mảng
+    final indexManHinh = _tabDangChon < 2 ? _tabDangChon : _tabDangChon - 1;
 
     return Scaffold(
       // Hiển thị màn hình tương ứng với tab đang chọn
@@ -85,19 +86,26 @@ class _MainScreenState extends State<MainScreen> {
               // Khoảng trống cho nút FAB (+) ở giữa
               const SizedBox(width: 56),
 
-              // Tab 3: Báo cáo
+              // Tab 3: Lịch sử
+              _buildNutTab(
+                icon: Icons.history_outlined,
+                iconDaChon: Icons.history,
+                nhanVien: 'Lịch sử',
+                tabIndex: 3,
+              ),
+              // Tab 4: Báo cáo
               _buildNutTab(
                 icon: Icons.bar_chart_outlined,
                 iconDaChon: Icons.bar_chart,
                 nhanVien: 'Báo cáo',
-                tabIndex: 3,
+                tabIndex: 4,
               ),
-              // Tab 4: Hồ sơ
+              // Tab 5: Hồ sơ
               _buildNutTab(
                 icon: Icons.person_outline,
                 iconDaChon: Icons.person,
                 nhanVien: 'Hồ sơ',
-                tabIndex: 4,
+                tabIndex: 5,
               ),
             ],
           ),
@@ -130,7 +138,7 @@ class _MainScreenState extends State<MainScreen> {
       onTap: () => setState(() => _tabDangChon = tabIndex),
       borderRadius: BorderRadius.circular(8),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

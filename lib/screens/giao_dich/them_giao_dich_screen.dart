@@ -107,7 +107,7 @@ class _ThemGiaoDichScreenState extends State<ThemGiaoDichScreen>
     // Tạo đối tượng giao dịch mới
     final giaoDichMoi = GiaoDich(
       amount: double.parse(_soTienCtrl.text.replaceAll('.', '')),
-      type: _loai,
+      type: _loai == 'income' ? 'thu' : 'chi',
       categoryId: _danhMucDaChon!.id,
       walletId: _viDaChon!.id,
       note: _ghiChuCtrl.text.trim(),
@@ -184,7 +184,7 @@ class _ThemGiaoDichScreenState extends State<ThemGiaoDichScreen>
             // ---- Chọn danh mục ----
             _buildKhungInput(
               child: DropdownButtonFormField<DanhMuc>(
-                value: _danhMucDaChon,
+                initialValue: _danhMucDaChon,
                 decoration: const InputDecoration(
                   labelText: 'Danh mục',
                   border: InputBorder.none,
@@ -205,7 +205,7 @@ class _ThemGiaoDichScreenState extends State<ThemGiaoDichScreen>
             // ---- Chọn ví ----
             _buildKhungInput(
               child: DropdownButtonFormField<Vi>(
-                value: _viDaChon,
+                initialValue: _viDaChon,
                 decoration: const InputDecoration(
                   labelText: 'Ví tiền',
                   border: InputBorder.none,
@@ -295,7 +295,7 @@ class _ThemGiaoDichScreenState extends State<ThemGiaoDichScreen>
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),

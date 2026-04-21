@@ -89,7 +89,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
       ),
       body: Column(
         children: [
-          // Tìm kiếm
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
             child: TextField(
@@ -103,14 +102,11 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
               onChanged: (v) => setState(() => _keyword = v),
             ),
           ),
-
-          // Bộ lọc
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             child: Row(
               children: [
-                // Lọc loại
                 ...['Tất cả', 'Thu', 'Chi'].map((o) {
                   final colors = {'Thu': Colors.green, 'Chi': Colors.red};
                   final isSelected = o == _selectedType;
@@ -120,7 +116,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                     child: ChoiceChip(
                       label: Text(o),
                       selected: isSelected,
-                      selectedColor: color.withOpacity(0.2),
+                      selectedColor: color.withValues(alpha: 0.2),
                       labelStyle: TextStyle(
                         color: isSelected ? color : null,
                         fontWeight: isSelected ? FontWeight.bold : null,
@@ -130,8 +126,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                   );
                 }),
                 const SizedBox(width: 8),
-
-                // Lọc danh mục
                 DropdownButton<int?>(
                   value: _selectedCategoryId,
                   hint: const Text('Danh mục'),
@@ -145,8 +139,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 const SizedBox(width: 8),
-
-                // Lọc ngày
                 ActionChip(
                   avatar: const Icon(Icons.date_range, size: 16),
                   label: Text(
@@ -166,8 +158,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
               ],
             ),
           ),
-
-          // Tổng kết
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: Row(
@@ -190,15 +180,13 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
             ),
           ),
           const Divider(height: 1),
-
-          // Danh sách
           Expanded(
             child: filtered.isEmpty
                 ? const Center(child: Text('Không có giao dịch nào'))
                 : ListView.separated(
                     itemCount: filtered.length,
-                    separatorBuilder: (_, _) => const Divider(height: 1),
-                    itemBuilder: (_, i) => _TransactionTile(
+                    separatorBuilder: (context, index) => const Divider(height: 1),
+                    itemBuilder: (context, i) => _TransactionTile(
                       t: filtered[i],
                       onDelete: () async {
                         await DBHelper.deleteTransaction(filtered[i].id!);
@@ -229,7 +217,7 @@ class _TransactionTile extends StatelessWidget {
     final color = t.isIncome ? Colors.green : Colors.red;
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: color.withOpacity(0.15),
+        backgroundColor: color.withValues(alpha: 0.15),
         child: Icon(
           t.isIncome ? Icons.arrow_downward : Icons.arrow_upward,
           color: color,
