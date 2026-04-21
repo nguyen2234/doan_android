@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'database/user_dao.dart';
+import 'database/db_helper.dart';
 import 'screens/auth/login_screen.dart';
 import 'screens/main_screen.dart'; // Màn hình chính có bottom navigation
 import 'utils/session.dart';
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
       return;
     }
-    final user = await UserDao().getById(userId);
+    final user = await DBHelper.getUserById(userId);
     if (!mounted) return;
     if (user == null) {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const LoginScreen()));

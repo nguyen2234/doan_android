@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../database/user_dao.dart';
+import '../../database/db_helper.dart';
 import '../../models/user.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _loading = true);
 
-    final existing = await UserDao().getByEmail(_emailCtrl.text.trim());
+    final existing = await DBHelper.getUserByEmail(_emailCtrl.text.trim());
     if (existing != null) {
       setState(() => _loading = false);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -36,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       password: _passwordCtrl.text,
       createdAt: DateTime.now().toIso8601String(),
     );
-    await UserDao().insert(user);
+    await DBHelper.insertUser(user);
     setState(() => _loading = false);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
