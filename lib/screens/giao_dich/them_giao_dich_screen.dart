@@ -107,7 +107,7 @@ class _ThemGiaoDichScreenState extends State<ThemGiaoDichScreen>
     // Tạo đối tượng giao dịch mới
     final giaoDichMoi = GiaoDich(
       amount: double.parse(_soTienCtrl.text.replaceAll('.', '')),
-      type: _loai,
+      type: _loai == 'income' ? 'thu' : 'chi',
       categoryId: _danhMucDaChon!.id,
       walletId: _viDaChon!.id,
       note: _ghiChuCtrl.text.trim(),
