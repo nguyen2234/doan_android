@@ -197,7 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   moTa: _batThongBao ? 'Đang bật' : 'Đang tắt',
                   widget: Switch(
                     value: _batThongBao,
-                    activeColor: const Color(0xFF1A73E8),
+                    activeThumbColor: const Color(0xFF1A73E8),
                     onChanged: (v) => setState(() => _batThongBao = v),
                   ),
                 ),
@@ -209,7 +209,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   moTa: _cheDoToi ? 'Đang bật' : 'Đang tắt',
                   widget: Switch(
                     value: _cheDoToi,
-                    activeColor: const Color(0xFF1A73E8),
+                    activeThumbColor: const Color(0xFF1A73E8),
                     onChanged: (v) => setState(() => _cheDoToi = v),
                   ),
                 ),

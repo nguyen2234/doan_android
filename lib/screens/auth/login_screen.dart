@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../database/db_helper.dart';
 import '../../utils/session.dart';
 import 'register_screen.dart';
-import '../main_screen.dart'; // Chuyển sang màn hình chính sau khi đăng nhập
+import '../main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final user = await DBHelper.login(_emailCtrl.text.trim(), _passwordCtrl.text);
     setState(() => _loading = false);
     if (user == null) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Email hoặc mật khẩu không đúng')),
       );
@@ -31,7 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     await Session.save(user.id!);
     if (!mounted) return;
-    // Sau khi đăng nhập thành công, chuyển vào màn hình chính
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => MainScreen(user: user)));
   }
 
