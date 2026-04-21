@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/user.dart';
 import '../../utils/session.dart';
 import '../auth/login_screen.dart';
+import '../danh_muc/danh_muc_screen.dart';
 import 'chinh_sua_ho_so_screen.dart';
 
 // ============================================================
@@ -20,8 +21,14 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   // Biến giả lập trạng thái bật/tắt thông báo
   bool _batThongBao = true;
-  // Biến giả lập chế độ giao diện tối
   bool _cheDoToi = false;
+  late User _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _user = widget.user;
+  }
 
   // Hàm đăng xuất và quay về màn hình đăng nhập
   Future<void> _dangXuat() async {
@@ -58,13 +65,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   // Mở màn hình Chỉnh sửa hồ sơ
-  void _moChinhSuaHoSo() {
-    Navigator.push(
+  Future<void> _moChinhSuaHoSo() async {
+    final userMoi = await Navigator.push<User>(
       context,
       MaterialPageRoute(
-        builder: (_) => ChinhSuaHoSoScreen(user: widget.user),
+        builder: (_) => ChinhSuaHoSoScreen(user: _user),
       ),
     );
+    if (userMoi != null) setState(() => _user = userMoi);
   }
 
   // Hiện thông báo "Đang phát triển"
@@ -127,7 +135,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mauIcon: const Color(0xFFFF9800),
                   tieuDe: 'Quản lý danh mục',
                   moTa: 'Thêm, sửa, xóa danh mục thu/chi',
-                  onTap: () => _dangPhatTrien('Quản lý danh mục'),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const DanhMucScreen(),
+                    ),
+                  ),
                 ),
                 _ItemDanhMuc(
                   icon: Icons.account_balance_wallet_outlined,
@@ -330,10 +343,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     CircleAvatar(
                       radius: 45,
                       backgroundColor: Colors.white24,
-                      backgroundImage: widget.user.avatar != null
-                          ? FileImage(File(widget.user.avatar!))
+                      backgroundImage: _user.avatar != null
+                          ? FileImage(File(_user.avatar!))
                           : null,
-                      child: widget.user.avatar == null
+                      child: _user.avatar == null
                           ? const Icon(Icons.person, size: 45, color: Colors.white)
                           : null,
                     ),
@@ -358,7 +371,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               // Tên người dùng
               Text(
-                widget.user.name,
+                _user.name,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -369,7 +382,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               // Email
               Text(
-                widget.user.email,
+                _user.email,
                 style: const TextStyle(color: Colors.white70, fontSize: 13),
               ),
               const SizedBox(height: 16),
